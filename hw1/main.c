@@ -12,10 +12,10 @@ int main(int argc, char *argv[]) {
 	int num[6];
 	time_t cur_t;
 	time(&cur_t);
-	printf("еw╙О╔За{╙Ь╘╟╪жЁz╠mай╤R╬В╔x\n");
-	printf("╫п╟щ╠z╜nай╤R╢X╡у╪жЁz╠m:");
+	printf("Ф╜║Х©▌Е┘┴Х┤╗И∙╥Е╨ Ф╗┌И─▐Е╫╘ХЁ╪Х╡╥Ф╘÷Е▐╟\n\n");
+	printf("Х╚▀Е∙▐Ф┌╗Х╕│ХЁ╪Х╡╥Е╧╬Г╣└Ф╗┌И─▐Е╫╘:");
 	scanf("%d", &n);
-	printf("╔H╛╟╠zай╤R╙╨%d╡у╪жЁz╡у╕X©И╓J╕эlotto.txt\n", n);
+	printf("Д╩╔Г┌╨Ф┌╗ХЁ╪Х╡╥Г └%dГ╣└Ф╗┌И─▐Г╣└Е░┬Х╪╦Е┘╔Х┤Ёlotto.txt\n", n);
 	fp = fopen("lotto.txt", "w+");  
 	//if(fp = fopen("lotto.txt", "w+") == NULL)	printf("Cannot open the file");
 	
