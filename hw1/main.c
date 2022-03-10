@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 	int num[6];
 	time_t cur_t;
 	time(&cur_t);
-	printf("歡迎光臨長庚樂透彩購買機台\n\n");
+	printf("歡迎光臨長庚樂透彩購買機台\n");
 	printf("請問您要購買幾組樂透彩:");
 	scanf("%d", &n);
 	printf("以為您購買的%d組樂透組合輸入至lotto.txt\n", n);
