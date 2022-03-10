@@ -12,7 +12,8 @@ int main(int argc, char *argv[]) {
 	FILE* ftimes;
 	int n, spe, flag;
 	int op_id;	
-	int num[6], t = 1;
+	int num[6];
+    int t[0] ;
 	time_t cur_t;
 	time(&cur_t);
 	
@@ -26,25 +27,26 @@ int main(int argc, char *argv[]) {
 	fid = fopen("operator_id.bin","wb+");
 	fwrite(&op_id, sizeof(int), 1, fid);
 	fclose(fid);
-	/*if((ftimes = fopen("times.txt", "rb+")) == NULL)	{
+	if((ftimes = fopen("times.txt", "r")) == NULL)	{
 		ftimes = fopen("times.txt", "wb+");
-		t = 1;
-		if((fwrite(&t, sizeof(int), 1, ftimes)) != 1) printf("write fail\n");
+		t[0] = 1;
+		if((fwrite(t, sizeof(int), 1, ftimes)) != 1) printf("write fail\n");
+        //fclose(ftimes);
 		//write(&t, sizeof(int), 1, ftimes);
 		//printf("cgu\n");
 	}
 	else {
 		fclose(ftimes);
-		if((ftimes = fopen("times.txt","wb+")) ==NULL)	printf("open fail\n");
-		if((fread(&t, sizeof(int), 1, ftimes)) != 1) printf("read fail\n");
+		if((ftimes = fopen("times.bin","rb")) ==NULL)	printf("open fail\n");
+		if((fread(t, sizeof(int), 1, ftimes)) != 1) printf("read fail\n");
 		//fseek(ftimes, 0, SEEK_SET); 
-		t++;
-		if((fwrite(&t, sizeof(int), 1, ftimes)) != 1) printf("write fail\n");
-		printf("%d\n",t);
+		t[0]++;
+		if((fwrite(t, sizeof(int), 1, ftimes)) != 1) printf("write fail\n");
+		//printf("%d\n",t);
 	}
-	fclose(ftimes); */
+	fclose(ftimes); 
 	fprintf(fp, "=========lotto649=========\n");
-	fprintf(fp, "=======+ No.%04d +========\n",t);
+	fprintf(fp, "=======+ No.%04d +========\n",t[0]);
 	fprintf(fp, "=%s", ctime(&cur_t)); 					//有bug 
 	for(int i=1; i<=5; i++){
 		fprintf(fp, "[%d]: ", i);
@@ -79,7 +81,7 @@ int main(int argc, char *argv[]) {
 			fprintf(fp,"-- -- -- -- -- -- --\n");
 		}
 	}
-    printf("以為您購買的%d組樂透組合輸入至lotto[%05d].txt\n", n, t);
+    printf("以為您購買的%d組樂透組合輸入至lotto[%05d].txt\n", n, t[0]);
 	fprintf(fp, "=======* Op.%05d *========\n",op_id);
 	fprintf(fp, "======== csie@CGU =========\n");
 	fclose(fp);
