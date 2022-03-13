@@ -5,7 +5,7 @@
 
 #define counterFile "counter.bin"
 
-void lotto_print(int , int , int );
+void lotto_print(int , int);
 void init_file(void);
 int get_counter(void);
 void set_counter(int);
