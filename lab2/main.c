@@ -9,6 +9,7 @@
 void op_file(int);
 void lotto_print(int , int , int );
 void init_file(void);
+void record (int, int, int);
 int get_counter(void);
 void set_counter(int);
 int compare(const void* a,const void* b){
