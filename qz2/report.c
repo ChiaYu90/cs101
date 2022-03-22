@@ -19,14 +19,16 @@ void rep_file(int n) {
 	FILE* fp = fopen("Report.txt","w+");
 	fprintf(fp, "========= lotto649 Report =========\n");
 	fprintf(fp, "- Date ------ Num. ------ Receipt -\n");
-	for (int i=0; i<n; i++){
+	for (int i=0; i<=n; i++){
 		fprintf(fp, "%s      %2d/%02d       %4d\n", record[i].lotto_date, record[i].lotto_no
 											, (record[i].lotto_receipt/55), record[i].lotto_receipt);
+	
 		sum_no += record[i].lotto_no;
 		sum_total += record[i].lotto_receipt;
+		//printf("%s%d\n",record[i].lotto_date,i);
 	}
 	fprintf(fp, "-----------------------------------\n");
-	fprintf(fp, "%8d%7d/%02d       %d\n",n, sum_no, (sum_total/55), sum_total);
+	fprintf(fp, "%8d%7d/%02d       %d\n",n+1, sum_no, (sum_total/55), sum_total);
 	
 	time_t now = time(0);
 	strftime (date, 100,"%Y%m%d", localtime(&now));
@@ -54,8 +56,9 @@ int main(int argc, char *argv[]) {
 			strcpy(record[i].lotto_date, tmp.lotto_date) ;
 			record[i].lotto_receipt = tmp.lotto_receipt;
 		}
-		//printf("%d\n",tmp.emp_id);
+		//printf("%s %d\n",record[i].lotto_date,i);
 	}
+	
 	fclose(fp);
 	rep_file(i);
 	return 0;
