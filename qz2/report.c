@@ -26,11 +26,11 @@ void rep_file(int n) {
 		sum_total += record[i].lotto_receipt;
 	}
 	fprintf(fp, "-----------------------------------\n");
-	fprintf(fp, "%8d%7d/%02d       %d",n, sum_no, (sum_total/55), sum_total);
+	fprintf(fp, "%8d%7d/%02d       %d\n",n, sum_no, (sum_total/55), sum_total);
 	
 	time_t now = time(0);
 	strftime (date, 100,"%Y%m%d", localtime(&now));
-	(fp, "========= %sPrinted =========\n", date);
+	fprintf(fp, "========= %sPrinted =========\n", date);
 }
 int main(int argc, char *argv[]) {
 	lotto_record_t tmp;
