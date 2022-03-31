@@ -10,14 +10,15 @@ int rec_strlen(char *s){
     if(*s == '\0') return 0;
     return 1 + rec_strlen(s+1);
 }
-char* my_sort(char* s){
-	char tmp;
-	for (int i=0; i<my_strlen(s); i++){
-		for(int j=0; j<my_strlen(s)-i-1; j++){
-			if(*(s+j) > *(s+j+1)) {
-				tmp = *(s+j);
-				*(s+j) = *(s+j+1);
-				*(s+j+1) = tmp;
+char* my_sort(char* s) {
+    int len = 0;
+	for(int i = 0; *(s + i) != '\0'; i++) len++;
+	for(int i = 0; i < len; i++) {
+		for(int j = 0; j < len - 1 - i; j++) {
+			if(*(s + j) > *(s + j + 1)) {
+				char temp = *(s + j);
+					*(s + j) = *(s + j + 1);
+					*(s + j + 1) = temp;
 			}
 		}
 	}
