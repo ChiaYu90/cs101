@@ -29,6 +29,6 @@ int main (){
 
     printf("len = %d\n", my_strlen(s));
     printf("len = %d\n", rec_strlen(s));
-    //printf("sort = %s\n", my_sort(s));
+    printf("sort = %s\n", my_sort(s));
 	return 0;
 }
