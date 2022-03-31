@@ -14,14 +14,13 @@ char* my_sort(char* s){
 	char tmp;
 	for (int i=0; i<my_strlen(s); i++){
 		for(int j=0; j<my_strlen(s)-i-1; j++){
-			if(*(s+j) > *(s+j+1)){
+			if(*(s+j) > *(s+j+1)) {
 				tmp = *(s+j);
 				*(s+j) = *(s+j+1);
 				*(s+j+1) = tmp;
 			}
 		}
 	}
-	for(int i=0 ; i<13;i++)	printf("%c",*(s+i));
 	return s;
 }
 int main (){
