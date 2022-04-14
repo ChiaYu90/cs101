@@ -10,9 +10,9 @@ int* get_num(int (*n)[10], int size, int want, int* s){
     }
 }
 void sort(int** ap, int size) {
-	 
+	int a;
 	for(int i = 0; i < size; i++) {
-		int a = i;
+		a = i;
 		for(int j = i + 1; j < size; j++) {
 			if(*ap[i] > *ap[j]) {
 				int* temp = ap[i];
