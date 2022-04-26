@@ -56,6 +56,6 @@ int main(){
     printf("No.3------------\n");
     char a[] ="IUIU!";
     char b[] = "@CGU";
-    //printf("add_str_func = %s\n", add_str_func(a, b, func));
+    printf("add_str_func = %s\n", add_str_func(a, b, func));
     return 0;
 }
