@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int my_strlen(char* s){
-    int n;
+    int n = ;
     while(*(s+n) != '\0') n++;
     return n;
 }
