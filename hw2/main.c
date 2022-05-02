@@ -162,7 +162,7 @@ void emp_set (int emp_id){
 	printf("請輸入要新增的工作人員 Salary:");
 	scanf("%d", &new_id.emp_salary);
 	printf("輸入完成\n"); 
-	fp = fopen("operator_id.bin","ab");
+	fp = fopen("operator_id.bin","wb+");
 	fwrite(&new_id, sizeof(emp_record_t), 1, fp);
 	fclose (fp);
 } 
