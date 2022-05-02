@@ -1,65 +1,69 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h> 
+#include<time.h>
 #include <string.h>
-#include <time.h>
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-typedef struct {
-	int lotto_no;
-	int lotto_receipt;
-	int emp_id;
-	char lotto_date[10];
-	char lotto_time[10];
-}lotto_record_t;
-lotto_record_t record[10];
 
-void rep_file(int n) {
-	char date[10];
-	int sum_no = 0, sum_total =0;
-	FILE* fp = fopen("Report.txt","w+");
-	fprintf(fp, "========= lotto649 Report =========\n");
-	fprintf(fp, "- Date ------ Num. ------ Receipt -\n");
-	for (int i=0; i<=n; i++){
-		fprintf(fp, "%s      %2d/%02d       %4d\n", record[i].lotto_date, record[i].lotto_no
-											, (record[i].lotto_receipt/55), record[i].lotto_receipt);
-	
-		sum_no += record[i].lotto_no;
-		sum_total += record[i].lotto_receipt;
-		//printf("%s%d\n",record[i].lotto_date,i);
-	}
-	fprintf(fp, "-----------------------------------\n");
-	fprintf(fp, "%8d%7d/%02d       %d\n",n+1, sum_no, (sum_total/55), sum_total);
-	
+static char date[32];
+
+
+typedef struct lottoRecord{
+	int lotto_no;//= currentCount
+	int lotto_receipt;//= i *55
+	int emp_id;//= id
+	char lotto_date[32];//= date
+	char lotto_time[32];//= Time
+}lotto_record_t; 
+
+void cutTheTime(){ //cut the time to date&time
 	time_t now = time(0);
-	strftime (date, 100,"%Y%m%d", localtime(&now));
-	fprintf(fp, "========= %sPrinted =========\n", date);
+	strftime(date, 100, "%Y%m%d", localtime(&now));
 }
-int main(int argc, char *argv[]) {
-	lotto_record_t tmp;
-	//lotto_record_t record[10];
-	int i;
-	FILE* fp = fopen("records.bin", "rb");
-	if(fp == NULL)	printf("open fail\n"); 
-	while (fread(&tmp, sizeof(lotto_record_t), 1, fp)){
-		if(strcmp("\0", record[0].lotto_date) == 0)	{
-			record[0].lotto_no = tmp.lotto_no;
-			strcpy(record[0].lotto_date, tmp.lotto_date) ;
-			record[0].lotto_receipt = tmp.lotto_receipt;
+
+int main(){
+	FILE* fp_w= fopen("report.txt", "w+");
+	FILE* fp_r = fopen("records.bin", "r");
+	
+	lotto_record_t tmp[256];
+	int i = 0;
+	while(fread(&tmp[i], sizeof(lotto_record_t), 1, fp_r)){
+		i++;
+	}	
+	i--;
+
+	int no = 0; // = lotto_no = currentCount = i
+	int dateSum = 0, noSum, setsSum = 0, receiptSum = 0;
+	int j = 0;
+	
+	fprintf(fp_w,"========= lotto649 Report =========\n");
+	fprintf(fp_w,"- Date ------- Num. ------ Receipt -\n");
+	
+	while(j<=i){
+		int sets = 0; // lotto_receipt/55
+		int receipt = 0; // =lotto_receipt
+		while(strcmp(tmp[j].lotto_date,tmp[j+1].lotto_date) == 0){
+			sets = sets + (tmp[j].lotto_receipt/55);
+			receipt = receipt + tmp[j].lotto_receipt;
+			j++;
 		}
-		if(strcmp(tmp.lotto_date, record[i].lotto_date) == 0){
-			record[i].lotto_no = (record[i].lotto_no > tmp.lotto_no) ? record[i].lotto_no : tmp.lotto_no;
-			record[i].lotto_receipt += tmp.lotto_receipt;	
-		}
-		else{
-			i++;
-			record[i].lotto_no = tmp.lotto_no;
-			strcpy(record[i].lotto_date, tmp.lotto_date) ;
-			record[i].lotto_receipt = tmp.lotto_receipt;
-		}
-		//printf("%s %d\n",record[i].lotto_date,i);
+		sets = sets + (tmp[j].lotto_receipt/55);
+		receipt = receipt + tmp[j].lotto_receipt;
+		no = tmp[j].lotto_no - no;
+		dateSum ++;
+		printf("%d",no);
+		setsSum = setsSum + sets;
+		receiptSum = receiptSum + receipt;
+		fprintf(fp_w, "%s\t%d/%d\t\t%d\n", tmp[j].lotto_date, no, sets, receipt);
+		no = tmp[j].lotto_no;
+		j++;
 	}
 	
-	fclose(fp);
-	rep_file(i);
-	return 0;
+	fprintf(fp_w,"-----------------------------------\n");
+	fprintf(fp_w,"\t%d\t%d/%d\t\t%d\n", dateSum, tmp[i].lotto_no, setsSum, receiptSum);
+	cutTheTime();
+	fprintf(fp_w,"======== %s Printed =========", date);
+	
+	
+	fclose(fp_w);
+	fclose(fp_r);		
 }
