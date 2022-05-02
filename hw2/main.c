@@ -45,11 +45,11 @@ int main(int argc, char *argv[]) {
 		
 		int salary;
 	//UI
-        printf("please input the ID you want to add:");
+        printf("請輸入要新增操作人員 ID(1~99):");
         scanf("%d",&id);
-        printf("please input the NAME you want to add:");
+        printf("請輸入要新增操作人員 Name:");
         scanf("%s",name);
-        printf("please input the salary you want to add:");
+        printf("請輸入要新增的工作人員 Salary:");
         scanf("%d",&salary);
         emp_set(salary);
         printf("end the input");
