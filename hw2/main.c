@@ -4,7 +4,8 @@
 #include <string.h> 
 
 #define counterFile "counter.bin"
-
+int id;
+char name[32];
 //int cnt_file(void);
 void op_file(int);
 void lotto_print(int , int , int );
@@ -23,6 +24,7 @@ typedef struct {
 	char lotto_date[10];
 	char lotto_time[10];
 }lotto_record_t;
+
 typedef struct {
 	int emp_id;
 	char emp_name[15];
@@ -39,13 +41,28 @@ int main(int argc, char *argv[]) {
 	//printf("請輸入操作人員ID(O~5):");
 	scanf("%d", &op_id);
 	op_file(op_id);
-	if (!op_id)	emp_set(op_id);
-	printf("請問您要購買幾組樂透彩 (1~5):");
-	scanf("%d", &n);
+	if (!op_id)	{
+		
+		int salary;
+	//UI
+        printf("please input the ID you want to add:");
+        scanf("%d",&id);
+        printf("please input the NAME you want to add:");
+        scanf("%s",name);
+        printf("please input the salary you want to add:");
+        scanf("%d",&salary);
+        emp_set(salary);
+        printf("end the input");
+	}
+	else {
+		printf("請問您要購買幾組樂透彩 (1~5):");
+		scanf("%d", &n);
 	
-	lotto_print(cnt, n, op_id);
-	set_counter(cnt);  //記錄counter++ 
-	record(cnt, n, op_id);
+		lotto_print(cnt, n, op_id);
+		set_counter(cnt);  //記錄counter++ 
+		record(cnt, n, op_id);
+	}
+	
 	return 0;
 }
 void op_file(int op_id){
@@ -152,17 +169,14 @@ void record (int cnt, int n, int op_id){
 		fclose (fp);
 	
 }
-void emp_set (int emp_id){
-	emp_record_t new_id;
-	FILE* fp;
-	printf("請輸入要新增操作人員 ID(1~99):");
-	scanf("%d", &new_id.emp_id);
-	printf("請輸入要新增操作人員 Name:");
-	scanf("%s", new_id.emp_name);
-	printf("請輸入要新增的工作人員 Salary:");
-	scanf("%d", &new_id.emp_salary);
-	printf("輸入完成\n"); 
-	fp = fopen("operator_id.bin","wb+");
-	fwrite(&new_id, sizeof(emp_record_t), 1, fp);
-	fclose (fp);
+void emp_set (int salary){
+	FILE* fop = fopen("operator_id.txt","ab");
+	emp_record_t recordEmployee;
+	recordEmployee.emp_id = id;
+	strcpy(recordEmployee.emp_name, name);
+	recordEmployee.emp_salary = salary;
+
+	fwrite(&recordEmployee, sizeof(recordEmployee), 1, fop);
+	fclose(fop);
+
 } 
