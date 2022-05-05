@@ -54,6 +54,6 @@ int main (){
     head = append_node(head, 3333);
     show_list(head);
     free_all_node(head);
-    //printf("%p", head->next);
+    head =NULL;
     return 0;
 }
