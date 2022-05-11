@@ -25,12 +25,18 @@ node_t* append_node(node_t* head, int new_data){
 }
 node_t*  add_node(node_t* head, int new_data){
     node_t* tmp = allocate_node(new_data);
-    tmp->next = head;
-    head = tmp;
+    if(head){
+        tmp->next = head;
+        head = tmp;
+    }
+    else{
+        head = tmp;
+    }
     return head;
 }
 node_t*  del_node(node_t* head, int n){
     node_t* tmp = head, *tmp2;
+    if(head ==NULL) return head;
     if(n){
         for(int i=0; i<n-1; i++)     tmp = tmp->next;
         tmp2 = tmp->next;
@@ -38,9 +44,10 @@ node_t*  del_node(node_t* head, int n){
         free(tmp2);
         tmp2 = NULL;
     }
-    else{
+    else{   
         head = head->next;
         free(tmp);
+        tmp = NULL;
     }
     return head;
 }
