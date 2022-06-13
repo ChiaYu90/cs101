@@ -29,7 +29,7 @@ class ReplaceMyString{
         }
 };
 int main(){
-    ReplaceMyString IU, my;
+    ReplaceMyString my;
     my.replacestring("IU", "IU is best");
     return 0;
 }
