@@ -13,7 +13,7 @@ class ReadClass {
         string str, tmp;
         int class_num = 0;
         int flag = 0;
-        string name[10];
+        string* name[10];
     public:
         void showClass(){
             read.open("main.cpp");
@@ -23,12 +23,13 @@ class ReadClass {
                     class_num++;
                     read >> tmp;
                     //cout << tmp <<endl;
-                    name[class_num] = tmp;                    
+                    name[class_num] = (string*) malloc(tmp.length()+1);
+                    *name[class_num] = tmp;                    
                 }
             }
             cout << class_num << " " << "class in main.cpp\n";
             for (int i =1;i<=class_num; i++){
-                cout << "class " << name[i] <<endl;
+                cout << "class " << *name[i] <<endl;
             }
             read.close();
         }
