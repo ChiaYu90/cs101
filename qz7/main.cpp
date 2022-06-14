@@ -23,7 +23,7 @@ class ReadClass {
                     class_num++;
                     read >> tmp;
                     //cout << tmp <<endl;
-                    name[class_num] = (string*) malloc(tmp.length()+1);
+                    name[class_num] = (string*)calloc(tmp.length()+1, 0);
                     *name[class_num] = tmp;                    
                 }
             }
